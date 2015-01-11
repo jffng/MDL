@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+	<style type="text/css">
+	body {
+		font-family: monospace;
+		margin: 5%;
+	}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div>
+			Enter program here: <br><br>
+			<textarea rows="20" cols="100" id="program"></textarea><br><br>
+			<input type="button" id="submit" value="Submit"><br><br>		
+		</div><br>
+		<div id="response">Brackets balanced: </div>
+	</div>
+
+	<script type="text/javascript">
+		$("#submit").click( function() {			
+			var program = $("#program").val();
+			$.ajax({
+				url: '/validate',
+				type: 'GET',
+				dataType: 'jsonp',
+				data: {expr: program},
+			})
+			.done(function(data) {
+				console.log(data.expr);
+				$("#response").html("Brackets balanced: " + data.expr);
+				console.log("success");
+			})
+			.fail(function(e) {
+				console.log(e);
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+	</script>
+</body>
+</html>
