@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-#function to remove all non-bracket characters
 import sys
 
+#function to remove all non-bracket characters
 def isolate_brackets(program):
     all_brackets = set('({[]})')
     brackets = ''
