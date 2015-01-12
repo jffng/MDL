@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+	<style type="text/css">
+	body {
+		font-family: monospace;
+		margin: 5%;
+	}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div>
+			<form id="artist-search">
+				Enter artist name here: <br><br>
+				<input type="text" id="query"><br><br>
+				<input type="submit" value="Submit"><br><br>				
+			</form>
+		
+		</div><br>
+		<div id="album"></div>
+	</div>
+
+	<script type="text/javascript">
+		var searchAlbums = function (query) {
+			$.ajax({
+				url: 'https://api.spotify.com/v1/search',
+				data: {
+				q: query,
+				type: 'album'
+			},
+				success: function (response) {
+					if(response.albums.items.length) {
+						console.log(response);
+						var album = 'Artist: ' + JSON.stringify(query) + '<br>Most Recent Album: ' + response.albums.items[0].name;
+						document.getElementById('album').innerHTML = album;
+					} else {
+						document.getElementById('album').innerHTML = "Artist "+JSON.stringify(query)+" not found."						
+					}
+				}
+			});
+		};
+
+		document.getElementById('artist-search').addEventListener('submit', function(e){
+			e.preventDefault();
+			searchAlbums(document.getElementById('query').value);
+		}, false);
+
+	</script>
+</body>
+</html>

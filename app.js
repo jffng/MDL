@@ -10,7 +10,7 @@ app.use( bodyParser.urlencoded({
 	extended: true
 }));
 
-app.get('/exercise1', function(req,res){
+app.get('/exercise1', function (req,res) {
 	res.sendFile(__dirname + '/public/exercise1.html');
 });
 
@@ -24,7 +24,10 @@ app.get('/validate', function (req,res) {
 	});
 });
 
+app.get('/exercise2', function (req,res) {
+	res.sendFile(__dirname + '/public/exercise2.html');
+});
+
 app.listen(3000, '127.0.0.1');
 
-console.log('listening on port 3000')
-
+console.log('listening on port 3000');
